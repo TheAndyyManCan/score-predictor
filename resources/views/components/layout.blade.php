@@ -7,8 +7,8 @@
     </head>
     <body>
         <div class="max-w-full bg-black flex">
-            <div>
-                <h2 class="text-white text-4xl p-6">Predictor</h2>
+            <div class="p-6">
+                <a href="/" class="text-white uppercase font-bold text-4xl">Predictor</a>
             </div>
             <nav class="flex p-8 my-auto right-0 absolute">
                 <ul class="text-xs text-gray-200">
