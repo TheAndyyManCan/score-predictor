@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="text-center">
-        <h2 class="font-semibold uppercase text-xl p-6">Register</h2>
+    <div class="p-8 text-center">
+        <h2 class="font-semibold uppercase text-xl">Register</h2>
     </div>
     <x-grey-panel class="mx-auto max-w-lg">
         <form class="p-4 max-w-lg" method="POST" action="/register">
