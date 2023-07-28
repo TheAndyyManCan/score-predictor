@@ -28,4 +28,10 @@ class SessionsController extends Controller
         session()->regenerate();
         return redirect('/')->with('success', 'Login successful');
     }
+
+    public function destroy()
+    {
+        auth()->logout();
+        return redirect('/')->with('success', 'Successfully logged out');
+    }
 }
