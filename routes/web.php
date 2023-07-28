@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('login', [SessionsController::class, 'create']);
+Route::post('sessions', [SessionsController::class, 'store']);
