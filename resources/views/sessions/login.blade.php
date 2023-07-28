@@ -9,5 +9,8 @@
             <x-form-input name="password" type="password" required />
             <x-submit-button class="mt-2 ml-4">Login</x-submit-button>
         </form>
+        <div class="ml-8 pb-2">
+            <a href="/register" class="text-xs uppercase font-semibold">Not Registered?</a>
+        </div>
     </x-grey-panel>
 </x-layout>
