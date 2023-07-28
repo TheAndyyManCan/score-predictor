@@ -4,7 +4,7 @@
         <x-predictor-fixture team1="St. Johnstone" team2="Dundee" />
         <x-predictor-fixture team1="Kilmarnock" team2="Ross County" />
         <div class="mt-4 absolute sm:right-36 right-8">
-            <button type="submit" class="p-2 bg-black rounded text-white uppercase font-semibold hover:bg-gray-700">Submit</button>
+            <x-submit-button>Submit</x-submit-button>
         </div>
     </form>
 </x-layout>
