@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
@@ -27,8 +28,9 @@
         <main>
             {{ $slot }}
         </main>
+        <footer class="bg-black p-6 text-white font-semibold uppercase absolute bottom-0 w-full text-center text-xs">
+            Copyright Andy McDonald 2023
+        </footer>
+        <x-flash />
     </body>
-    <footer class="bg-black p-6 text-white font-semibold uppercase absolute bottom-0 w-full text-center text-xs">
-        Copyright Andy McDonald 2023
-    </footer>
 </html>
