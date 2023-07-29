@@ -13,7 +13,10 @@
             <nav class="flex p-8 my-auto right-0 absolute">
                 <ul class="text-xs text-gray-200">
                     @auth
-                        <x-nav-link link="/logout">Logout</x-nav-link>
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <button type="submit" class="inline px-2 font-semibold uppercase hover:text-white">Logout</button>
+                        </form>
                     @else
                         <x-nav-link link="/login">Login</x-nav-link>
                         <x-nav-link link="/register">Register</x-nav-link>
