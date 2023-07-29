@@ -5,4 +5,5 @@
             name="{{ $name }}"
             class="w-full p-2 h-8 rounded border focus:ring focus:outline-none font-semibold text-sm"
             {{ $attributes(['value' => old($name)]) }}/>
+    <x-form-error :name="$name" />
 </div>
