@@ -28,7 +28,7 @@
         <main>
             {{ $slot }}
         </main>
-        <footer class="bg-black p-6 text-white font-semibold uppercase absolute bottom-0 w-full text-center text-xs">
+        <footer class="bg-black p-6 text-white font-semibold uppercase fixed bottom-0 w-full text-center text-xs">
             Copyright Andy McDonald 2023
         </footer>
         <x-flash />

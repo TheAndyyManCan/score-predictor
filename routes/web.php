@@ -27,7 +27,7 @@ Route::get('/test', function(){
     foreach($teams as $team){
         array_push($teamNames, $team['name']);
     }
-    ddd($teamNames);
+    ddd($teams);
 });
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
