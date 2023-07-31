@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
+use \SportmonksFootballApi as SFA;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
+Route::get('/', [PredictionController::class, 'index'])->middleware('auth');
+
+Route::get('/test', function(){
+    $data = SFA::fixture()->setInclude('participants')->byDate('2023-08-05');
+    // $collectedData = collect($data['data'][0]['participants']);
+    $teams = $data['data'][0]['participants'];
+    $teamNames = array();
+    foreach($teams as $team){
+        array_push($teamNames, $team['name']);
+    }
+    ddd($teamNames);
+});
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
