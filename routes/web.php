@@ -20,14 +20,8 @@ use \SportmonksFootballApi as SFA;
 Route::get('/', [PredictionController::class, 'index'])->middleware('auth');
 
 Route::get('/test', function(){
-    $data = SFA::fixture()->setInclude('participants')->byDate('2023-08-05');
-    // $collectedData = collect($data['data'][0]['participants']);
-    $teams = $data['data'][0]['participants'];
-    $teamNames = array();
-    foreach($teams as $team){
-        array_push($teamNames, $team['name']);
-    }
-    ddd($teams);
+    $data = SFA::league()->byId(501);
+    ddd($data);
 });
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
