@@ -12,16 +12,18 @@ class FixtureController extends Controller
         $fixtures = array();
         $data = SFA::fixture()
             ->setInclude('participants')
-            ->setFilter('leagues:501')
+            ->setFilter('leagues=501')
             ->byDate($date);
 
-        foreach($data['data'] as $fixture){
-            $teamNames = array();
-            $teams = $fixture['participants'];
-            foreach($teams as $team){
-                array_push($teamNames, $team);
+        if(isset($data['data'])){
+            foreach($data['data'] as $fixture){
+                $teamNames = array();
+                $teams = $fixture['participants'];
+                foreach($teams as $team){
+                    array_push($teamNames, $team);
+                }
+                array_push($fixtures, $teamNames);
             }
-            array_push($fixtures, $teamNames);
         }
 
         return $fixtures;
