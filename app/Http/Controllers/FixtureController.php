@@ -28,4 +28,26 @@ class FixtureController extends Controller
 
         return $fixtures;
     }
+
+    public static function getByDateRange($date1, $date2)
+    {
+        $fixtures = array();
+        $data = SFA::fixture()
+            ->setInclude('participants')
+            ->setFilter('leagues=501')
+            ->byDateRange($date1, $date2);
+
+        if(isset($data['data'])){
+            foreach($data['data'] as $fixture){
+                $teamNames = array();
+                $teams = $fixture['participants'];
+                foreach($teams as $team){
+                    array_push($teamNames, $team);
+                }
+                array_push($fixtures, $teamNames);
+            }
+        }
+
+        return $fixtures;
+    }
 }
