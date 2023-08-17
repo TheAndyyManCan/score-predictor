@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\GameweekController;
 use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Models\Gameweek;
 use Illuminate\Support\Facades\Route;
 use \SportmonksFootballApi as SFA;
 
