@@ -27,7 +27,7 @@ class FixtureController extends Controller
             ->where('sportsmonk_id', $fixtureid)
             ->first();
 
-        return isset($fixture) ? true : false;
+        return isset($fixture);
     }
 
     public static function getByDate($date)
@@ -67,9 +67,11 @@ class FixtureController extends Controller
             foreach($data['data'] as $fixture){
                 $teamNames = array();
                 $teams = $fixture['participants'];
+
                 foreach($teams as $team){
                     array_push($teamNames, $team);
                 }
+
                 array_push($fixtures, $teamNames);
 
                 if(!FixtureController::checkFixtureExists($fixture['id'])){

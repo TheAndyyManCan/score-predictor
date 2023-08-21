@@ -26,7 +26,7 @@ class GameweekController extends Controller
             ->where('end_date', $enddate)
             ->first();
 
-        return isset($gw) ? true : false;
+        return isset($gw);
     }
 
     public static function getGameweekByDates($startdate, $enddate)
