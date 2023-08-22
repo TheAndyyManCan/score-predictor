@@ -21,13 +21,15 @@ class FixtureController extends Controller
         Fixture::create($attributes);
     }
 
-    public static function checkFixtureExists($fixtureid)
+    public static function getFixtureBySportsmonkId($fixtureid)
     {
         $fixture = DB::table('fixtures')
             ->where('sportsmonk_id', $fixtureid)
             ->first();
 
-        return isset($fixture);
+        return $fixture;
+
+        // return isset($fixture);
     }
 
     public static function getByDate($date)
@@ -65,16 +67,16 @@ class FixtureController extends Controller
         if(isset($data['data'])){
 
             foreach($data['data'] as $fixture){
-                $teamNames = array();
-                $teams = $fixture['participants'];
+                // $teamNames = array();
+                // $teams = $fixture['participants'];
 
-                foreach($teams as $team){
-                    array_push($teamNames, $team);
-                }
+                // foreach($teams as $team){
+                //     array_push($teamNames, $team);
+                // }
 
-                array_push($fixtures, $teamNames);
+                array_push($fixtures, $fixture);
 
-                if(!FixtureController::checkFixtureExists($fixture['id'])){
+                if(FixtureController::getFixtureBySportsmonkId($fixture['id']) == null){
                     FixtureController::store(
                         $fixture['id'],
                         $gameweek->id,

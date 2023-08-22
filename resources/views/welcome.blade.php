@@ -1,10 +1,12 @@
 <x-layout>
+    {{-- @dd($fixtures) --}}
     @if(count($fixtures))
-        <form class="sm:mx-36 mx-8">
+        <form class="sm:mx-36 mx-8" method="POST" action="/predictions">
+            @csrf
             @foreach($fixtures as $fixture)
-                <x-predictor-fixture :team1="$fixture[0]" :team2="$fixture[1]" />
+                <x-predictor-fixture :team1="$fixture['participants'][0]" :team2="$fixture['participants'][1]" :fixtureId="$fixture['id']" />
             @endforeach
-            <div class="py-6">
+            <div class="py-4">
                 <x-submit-button>Submit</x-submit-button>
             </div>
         </form>

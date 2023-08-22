@@ -21,6 +21,8 @@ use \SportmonksFootballApi as SFA;
 
 Route::get('/', [PredictionController::class, 'index'])->middleware('auth');
 
+Route::post('predictions', [PredictionController::class, 'store'])->middleware('auth');
+
 Route::get('/test', function(){
     $data = SFA::league()->byId(501);
     ddd($data);
