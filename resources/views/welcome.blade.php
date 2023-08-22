@@ -10,5 +10,9 @@
                 <x-submit-button>Submit</x-submit-button>
             </div>
         </form>
+    @else
+        <div class="max-w-full sm:mx-36 mx-8 mt-8 bg-gray-200 rounded-xl p-6 text-center font-semibold">
+            No predictions left to submit for this gameweek. Good luck!
+        </div>
     @endif
 </x-layout>

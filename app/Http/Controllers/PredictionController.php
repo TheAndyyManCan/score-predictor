@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use App\Models\Prediction;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class PredictionController extends Controller
 {
@@ -16,12 +17,26 @@ class PredictionController extends Controller
         $friday = new CarbonImmutable('next friday');
         $thursday = $friday->addDays(6);
 
+        $fixtures = array();
+        $data = FixtureController::getByDateRange($friday->toDateString(), $thursday->toDateString());
+
+        foreach($data as $fixture){
+            $prediction = DB::table('predictions')
+                ->where('sportmonks_id', $fixture['id'])
+                ->where('user_id', auth()->id())
+                ->first();
+
+            if(!isset($prediction)){
+                array_push($fixtures, $fixture);
+            }
+        }
+
         if(!GameweekController::checkGameweekExists($friday, $thursday)){
             GameweekController::store($friday->toDateString(), $thursday->toDateString());
         }
 
         return view('welcome', [
-            'fixtures' => FixtureController::getByDateRange($friday->toDateString(), $thursday->toDateString())
+            'fixtures' => $fixtures
         ]);
     }
 
