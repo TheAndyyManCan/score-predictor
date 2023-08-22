@@ -13,8 +13,9 @@
                     <a href="/" class="text-white uppercase font-bold text-4xl">Predictor</a>
                 </div>
                 <nav class="flex p-8 my-auto right-0 absolute">
-                    <ul class="text-xs text-gray-200">
+                    <ul class="text-xs text-gray-200 flex">
                         @auth
+                            <x-nav-link link="/account">Account</x-nav-link>
                             <form method="POST" action="/logout">
                                 @csrf
                                 <button type="submit" class="inline px-2 font-semibold uppercase hover:text-white">Logout</button>

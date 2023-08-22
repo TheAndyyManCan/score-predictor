@@ -4,6 +4,7 @@ use App\Http\Controllers\GameweekController;
 use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\AccountController;
 use App\Models\Gameweek;
 use Illuminate\Support\Facades\Route;
 use \SportmonksFootballApi as SFA;
@@ -34,3 +35,5 @@ Route::post('register', [RegisterController::class, 'store'])->middleware('guest
 Route::get('login', [SessionsController::class, 'create'])->middleware('guest')->name('login');
 Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+Route::get('account', [AccountController::class, 'index'])->middleware('auth');
