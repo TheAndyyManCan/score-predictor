@@ -7,6 +7,7 @@ use App\Http\Controllers\FixtureController;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use App\Models\Prediction;
+use Illuminate\Support\Facades\Validator;
 
 class PredictionController extends Controller
 {
@@ -26,22 +27,32 @@ class PredictionController extends Controller
 
     public function store()
     {
-        ddd(request());
-        foreach(request('fixtures') as $fixture){
-            ddd($fixture);
-            $attributes = $fixture->validate([
-                'sportmonks_id' => ['required', 'integer'],
-                'home_prediciton' => ['required', 'integer'],
-                'away_prediction' => ['required', 'integer']
-            ]);
+        $rules = array(
+            'sportmonks_id' => ['required', 'numeric'],
+            'home_prediction' => ['required', 'numeric'],
+            'away_prediction' => ['required', 'numeric']
+        );
 
-            $attributes['user_id'] = auth()->id();
+        $errors = array();
 
-            $fixture = FixtureController::getFixtureBySportsmonkId($fixture['sportsmonk_id']);
+        foreach(request('fixtures') as $fixtureId => $fixture){
+            $validator = Validator::make($fixture, $rules);
 
-            $attributes['fixture_id'] = $fixture->id;
+            if($validator->fails()){
+                $errors[$fixtureId] = $validator->errors();
+            }
 
-            Prediction::create($attributes);
+            if(!empty($errors)){
+                return response()->json(['errors' => $errors], 422);
+            } else {
+                $attributes = $fixture;
+                $attributes['user_id'] = auth()->id();
+                $fixture = FixtureController::getFixtureBySportsmonkId($fixture['sportmonks_id']);
+                $attributes['fixture_id'] = $fixture->id;
+                Prediction::create($attributes);
+            }
         }
+
+        return redirect('/')->with('success', 'Predictions entered correctly');
     }
 }

@@ -6,7 +6,7 @@
             <x-predictor-label>{{ $team1['name'] }}</x-predictor-label>
         </div>
         <div>
-            <input type="hidden" name="fixtures[{{ $fixtureId }}][sportsmonk_id]" value="{{ $fixtureId }}" />
+            <input type="hidden" name="fixtures[{{ $fixtureId }}][sportmonks_id]" value="{{ $fixtureId }}" />
             <x-predictor-input name="fixtures[{{ $fixtureId }}][home_prediction]"/>
             -
             <x-predictor-input name="fixtures[{{ $fixtureId }}][away_prediction]" />
