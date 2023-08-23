@@ -40,6 +40,11 @@ class PredictionController extends Controller
         ]);
     }
 
+    public function show()
+    {
+        return view('account.predictions');
+    }
+
     public function store()
     {
         $rules = array(

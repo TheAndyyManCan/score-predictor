@@ -37,3 +37,4 @@ Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
 Route::get('account', [AccountController::class, 'index'])->middleware('auth');
+Route::get('account/predictions', [PredictionController::class, 'show'])->middleware('auth');
