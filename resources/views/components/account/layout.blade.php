@@ -7,7 +7,7 @@
             <x-account.list-item link="/account/predictions" text="predictions" route="account/predictions" />
         </ul>
     </div>
-    <div class="w-full bg-gray-200 rounded-xl">
+    <div class="w-full bg-gray-200 rounded-xl p-6">
         {{ $slot }}
     </div>
 </div>

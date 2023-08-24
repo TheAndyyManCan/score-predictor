@@ -13,7 +13,7 @@
         </div>
         <div class="flex">
             <x-predictor-label>{{ $team2['name'] }}</x-predictor-label>
-            <img class="h-10 w-10 ml-2" src="{{ $team2['image_path'] }}"
+            <img class="h-10 w-10 ml-2" src="{{ $team2['image_path'] }}" />
         </div>
     </div>
 </div>

@@ -9,6 +9,7 @@ use Carbon\CarbonImmutable;
 use App\Models\Prediction;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use \SportmonksFootballApi as SFA;
 
 class PredictionController extends Controller
 {
@@ -42,7 +43,24 @@ class PredictionController extends Controller
 
     public function show()
     {
-        return view('account.predictions');
+        $predictions = DB::table('predictions')
+            ->join('fixtures', 'predictions.fixture_id', '=', 'fixtures.id')
+            ->where('predictions.user_id', auth()->id())
+            ->get();
+
+        $teams = array();
+
+        foreach($predictions as $fixture){
+            $homeTeam = SFA::team()->byId($fixture->home_team_id);
+            $teams[$fixture->fixture_id]['home_team'] = $homeTeam;
+            $awayTeam = SFA::team()->byId($fixture->away_team_id);
+            $teams[$fixture->fixture_id]['away_team'] = $awayTeam;
+        }
+
+        return view('account.predictions',[
+            'predictions' => $predictions,
+            'teams' => $teams
+        ]);
     }
 
     public function store()
