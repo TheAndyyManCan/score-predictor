@@ -50,6 +50,7 @@ class PredictionController extends Controller
 
         $teams = array();
 
+        /*TODO: Refactor to make this call the API asynchronously */
         foreach($predictions as $fixture){
             $homeTeam = SFA::team()->byId($fixture->home_team_id);
             $teams[$fixture->fixture_id]['home_team'] = $homeTeam;

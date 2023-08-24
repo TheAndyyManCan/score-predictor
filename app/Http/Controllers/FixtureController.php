@@ -36,7 +36,7 @@ class FixtureController extends Controller
     {
         $fixtures = array();
         $data = SFA::fixture()
-            ->setInclude('participants')
+            ->setInclude('participants;leagues;')
             ->setFilter('leagues=501')
             ->byDate($date);
 
