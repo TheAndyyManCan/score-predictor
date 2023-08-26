@@ -18,6 +18,10 @@ class PredictionController extends Controller
         $friday = new CarbonImmutable('next friday');
         $thursday = $friday->addDays(6);
 
+        if(!GameweekController::checkGameweekExists($friday, $thursday)){
+            GameweekController::store($friday->toDateString(), $thursday->toDateString());
+        }
+
         $fixtures = array();
         $data = FixtureController::getByDateRange($friday->toDateString(), $thursday->toDateString());
 
@@ -30,10 +34,6 @@ class PredictionController extends Controller
             if(!isset($prediction)){
                 array_push($fixtures, $fixture);
             }
-        }
-
-        if(!GameweekController::checkGameweekExists($friday, $thursday)){
-            GameweekController::store($friday->toDateString(), $thursday->toDateString());
         }
 
         return view('welcome', [
