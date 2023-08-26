@@ -4,7 +4,6 @@
             @csrf
             <x-form-input name="name" value="{{ auth()->user()->name }}" required />
             <x-form-input name="email" value="{{ auth()->user()->email }}" required />
-            <x-form-input name="password" type="password" required />
             <x-submit-button class="mt-2 ml-4">Edit Account</x-submit-button>
         </form>
     </x-account.layout>
