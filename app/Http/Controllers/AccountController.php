@@ -23,4 +23,18 @@ class AccountController extends Controller
         $user->update($attributes);
         return redirect('/account')->with('success', 'Account updated successfully');
     }
+
+    public function edit()
+    {
+        return view('account.change-password');
+    }
+
+    public function editPassword()
+    {
+        $attributes = request()->validate([
+            'currentpassword' => ['required', 'min:7', 'max:255'],
+            'newpassword' => ['required', 'min:7', 'max:255'],
+            'confirmnewpassword' => ['required', 'min:7', 'max:255']
+        ]);
+    }
 }
