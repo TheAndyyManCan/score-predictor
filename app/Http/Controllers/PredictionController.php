@@ -10,11 +10,11 @@ use App\Models\Prediction;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use \SportmonksFootballApi as SFA;
+use App\Jobs\ProcessFixturesAPI;
 
-class PredictionController extends Controller
-{
-    public function index()
-    {
+class PredictionController extends Controller {
+
+    public function index() {
         $friday = new CarbonImmutable('next friday');
         $thursday = $friday->addDays(6);
 
@@ -41,8 +41,7 @@ class PredictionController extends Controller
         ]);
     }
 
-    public function show()
-    {
+    public function show() {
         $predictions = DB::table('predictions')
             ->join('fixtures', 'predictions.fixture_id', '=', 'fixtures.id')
             ->where('predictions.user_id', auth()->id())
@@ -52,10 +51,10 @@ class PredictionController extends Controller
 
         /*TODO: Refactor to make this call the API asynchronously */
         foreach($predictions as $fixture){
-            $homeTeam = SFA::team()->byId($fixture->home_team_id);
-            $teams[$fixture->fixture_id]['home_team'] = $homeTeam;
-            $awayTeam = SFA::team()->byId($fixture->away_team_id);
-            $teams[$fixture->fixture_id]['away_team'] = $awayTeam;
+            $pfa = new ProcessFixturesAPI();
+            $newteams = $pfa->handle($fixture);
+            $teams[$fixture->fixture_id]['home_team'] = $newteams[0];
+            $teams[$fixture->fixture_id]['away_team'] = $newteams[1];
         }
 
         return view('account.predictions',[
@@ -64,8 +63,7 @@ class PredictionController extends Controller
         ]);
     }
 
-    public function store()
-    {
+    public function store() {
         $rules = array(
             'sportmonks_id' => ['required', 'numeric'],
             'home_prediction' => ['required', 'numeric'],
