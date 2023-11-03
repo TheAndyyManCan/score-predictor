@@ -17,16 +17,14 @@ class ProcessFixturesAPI implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
-    {
+    public function __construct() {
         //
     }
 
     /**
      * Execute the job.
      */
-    public function handle($fixture): array
-    {
+    public function handle($fixture): array {
         $teams = array();
         $hometeam = SFA::team()->byId($fixture->home_team_id);
         $awayteam = SFA::team()->byId($fixture->away_team_id);

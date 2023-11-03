@@ -15,6 +15,7 @@
                 <nav class="flex p-8 my-auto right-0 absolute">
                     <ul class="text-xs text-gray-200 flex">
                         @auth
+                            <x-nav-link link="/league">League</x-nav-link>
                             <x-nav-link link="/account">Account</x-nav-link>
                             <form method="POST" action="/logout">
                                 @csrf

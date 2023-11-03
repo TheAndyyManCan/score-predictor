@@ -49,7 +49,6 @@ class PredictionController extends Controller {
 
         $teams = array();
 
-        /*TODO: Refactor to make this call the API asynchronously */
         foreach($predictions as $fixture){
             $pfa = new ProcessFixturesAPI();
             $newteams = $pfa->handle($fixture);
