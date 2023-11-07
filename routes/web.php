@@ -5,6 +5,7 @@ use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\LeagueController;
 use App\Models\Gameweek;
 use Illuminate\Support\Facades\Route;
 use \SportmonksFootballApi as SFA;
@@ -40,3 +41,5 @@ Route::get('account', [AccountController::class, 'index'])->middleware('auth');
 Route::post('account', [AccountController::class, 'update'])->middleware('auth');
 Route::get('account/predictions', [PredictionController::class, 'show'])->middleware('auth');
 Route::get('account/password', [AccountController::class, 'edit'])->middleware('auth');
+
+Route::get('league', [LeagueController::class, 'index'])->middleware('auth');

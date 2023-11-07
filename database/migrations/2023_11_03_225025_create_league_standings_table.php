@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leagues', function (Blueprint $table) {
+        Schema::create('league_standings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
-            $table->float('pot_total');
-            $table->date('start_date');
-            $table->date('end_date');
-       });
+            $table->integer('points');
+            $table->integer('correct_results');
+            $table->integer('correct_scores');
+            $table->foreignId('user_id');
+        });
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leagues');
+        Schema::dropIfExists('league_standings');
     }
 };
